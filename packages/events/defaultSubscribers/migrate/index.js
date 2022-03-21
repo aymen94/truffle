@@ -36,21 +36,6 @@ module.exports = {
       }
     ],
 
-    "migrate:settingCompletedMigrations:start": [
-      async function (data) {
-        if (this.config.quiet) return;
-
-        await this.reporter.startTransaction(data);
-      }
-    ],
-    "migrate:settingCompletedMigrations:succeed": [
-      async function (data) {
-        if (this.config.quiet) return;
-        const message = await this.reporter.endTransaction(data);
-        this.logger.log(message);
-      }
-    ],
-
     "migrate:migration:start": [
       async function (data) {
         if (this.config.quiet) return;

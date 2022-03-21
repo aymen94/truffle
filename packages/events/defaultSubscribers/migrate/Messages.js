@@ -273,12 +273,6 @@ class Messages {
         return stopText ? stopText + "\n" + output : output;
       },
 
-      // Transactions
-      endTransaction: () => {
-        if (reporter.blockSpinner) reporter.blockSpinner.stop();
-        return `   > ${data.message}`;
-      },
-
       // Libraries
       linking: () => {
         let output =

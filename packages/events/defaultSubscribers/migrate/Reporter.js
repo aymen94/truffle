@@ -270,33 +270,6 @@ class Reporter {
     return await this.processDeploymentError(data);
   }
 
-  // --------------------------  Transaction Handlers  ------------------------------------------
-
-  /**
-   * Run on `startTransaction` event. This is fired by migrations on save
-   * but could also be fired within a migrations script by a user.
-   * @param  {Object} data
-   */
-  async startTransaction(data) {
-    const message = data.message || "Starting unknown transaction...";
-    this.blockSpinner = new ora({
-      text: message,
-      spinner: indentedSpinner,
-      color: "red"
-    });
-    this.blockSpinner.start();
-  }
-
-  /**
-   * Run after a start transaction
-   * @param  {Object} data
-   */
-  async endTransaction(data) {
-    data.message = data.message || "Ending unknown transaction....";
-    const message = this.messages.steps("endTransaction", data);
-    return message;
-  }
-
   // ----------------------------  Library Event Handlers ------------------------------------------
   linking(data) {
     return this.messages.steps("linking", data);

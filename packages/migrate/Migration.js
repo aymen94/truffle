@@ -84,21 +84,15 @@ class Migration {
       }
 
       if (Migrations && Migrations.isDeployed()) {
-        const message = `Saving migration to chain.`;
         if (!this.dryRun) {
-          const data = { message: message };
-          await emitEvent(
-            options,
-            "migrate:settingCompletedMigrations:start",
-            data
-          );
+          await emitEvent(options, "migrate:settingCompletedMigrations:start");
         }
 
         const migrations = await Migrations.deployed();
         const receipt = await migrations.setCompleted(this.number);
 
         if (!this.dryRun) {
-          const data = { receipt: receipt, message: message };
+          const data = { receipt: receipt };
           await emitEvent(
             options,
             "migrate:settingCompletedMigrations:succeed",
